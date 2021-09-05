@@ -43,13 +43,14 @@ public class Member extends BaseEntity implements Persistable<Long> {
         return this.getCreatedDate() == null;
     }
 
-    public Member(String memberName, int memberAge, String memberSex, Address address) {
+    public Member(String emailId, String password, String memberName, int memberAge, String memberSex, Address address) {
+        this.emailId = emailId;
+        this.password = password;
         this.memberName = memberName;
         this.memberAge = memberAge;
         this.memberSex = memberSex;
         this.address = address;
     }
-
 
     /**
      * 연관관계 메서드
