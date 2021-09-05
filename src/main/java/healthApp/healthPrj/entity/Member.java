@@ -17,6 +17,10 @@ public class Member extends BaseEntity implements Persistable<Long> {
     @Column(name = "member_id")
     private Long id;
 
+    private String emailId;
+
+    private String password;
+
     private String memberName;
 
     private int memberAge;
