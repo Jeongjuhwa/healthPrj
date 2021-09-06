@@ -19,13 +19,20 @@ public class MemberApiController {
 
     private final MemberService memberService;
 
-    @PostMapping("members")
+    /**
+     * 회원가입
+     * @param request
+     * @return createMemberResponse
+     */
+    @PostMapping("/members")
     public createMemberResponse saveMember(@RequestBody @Valid CreateMemberRequest request){
         Address address = new Address(request.getCity(),request.getStreet(), request.getZipcode());
         Member member = new Member(request.getEmailId(), request.getPassword(), request.getMemberName(), request.getMemberAge(), request.getMemberSex(),address );
         Long memberId = memberService.join(member);
         return new createMemberResponse(memberId, "가입 완료");
     }
+
+
 
     @Data
     static class createMemberResponse{

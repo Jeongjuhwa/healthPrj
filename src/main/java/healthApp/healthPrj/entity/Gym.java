@@ -25,12 +25,12 @@ public class Gym extends BaseEntity implements Persistable<Long> {
     @OneToMany(mappedBy = "gym")
     private List<Trainer> trainerList = new ArrayList<>();
 
-    @Embedded
-    private Address address;
-
     private String gymName;
 
     private String gymNumber;
+
+    @Embedded
+    private Address address;
 
     @Enumerated(EnumType.STRING)
     private JoinStatus status;
@@ -40,6 +40,10 @@ public class Gym extends BaseEntity implements Persistable<Long> {
         return this.getCreatedDate() == null;
     }
 
-
-
+    public Gym(String gymName, String gymNumber, Address address) {
+        this.gymName = gymName;
+        this.gymNumber = gymNumber;
+        this.address = address;
+        this.status = JoinStatus.PENDING;
+    }
 }
