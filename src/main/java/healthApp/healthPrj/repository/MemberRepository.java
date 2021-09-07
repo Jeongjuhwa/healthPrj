@@ -13,8 +13,10 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
 
     Optional<Member> findByEmailId(String emailId);
 
-    @Query("select m from Member m")
-    Page<Member> findMemberPage(Pageable pageable);
+
+    Page<Member> findAll(Pageable pageable);
+
+
 
 
 }

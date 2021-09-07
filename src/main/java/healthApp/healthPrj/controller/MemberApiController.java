@@ -46,12 +46,14 @@ public class MemberApiController {
                                       @RequestParam(value = "limit", defaultValue = "100") int limit){
 
         PageRequest pageRequest = PageRequest.of(offset, limit);
-        Page<Member> all = memberRepository.findMemberPage(pageRequest);
+        Page<Member> all = memberRepository.findAll(pageRequest);
         Page<MemberDTO> map = all.map(m -> new MemberDTO(m));
         long totalElements = map.getTotalElements();
         return new Result(totalElements,map);
 
     }
+
+
 
     @Data
     @AllArgsConstructor
