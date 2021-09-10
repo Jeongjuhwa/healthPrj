@@ -1,10 +1,11 @@
 package healthApp.healthPrj.controller;
 
+import healthApp.healthPrj.controller.dto.MemberDto;
+import healthApp.healthPrj.controller.dto.Result;
 import healthApp.healthPrj.entity.Address;
 import healthApp.healthPrj.entity.Member;
 import healthApp.healthPrj.repository.MemberRepository;
 import healthApp.healthPrj.service.MemberService;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -47,7 +46,7 @@ public class MemberApiController {
 
         PageRequest pageRequest = PageRequest.of(offset, limit);
         Page<Member> all = memberRepository.findAll(pageRequest);
-        Page<MemberDTO> map = all.map(m -> new MemberDTO(m));
+        Page<MemberDto> map = all.map(m -> new MemberDto(m));
         long totalElements = map.getTotalElements();
         return new Result(totalElements,map);
 
@@ -55,35 +54,8 @@ public class MemberApiController {
 
 
 
-    @Data
-    @AllArgsConstructor
-    static class Result<T>{
-
-        private Long allDataCount;
-        private T data;
 
 
-
-    }
-
-    @Data
-    static class MemberDTO{
-        private String name;
-        private int age;
-        private String sex;
-        private String city;
-        private String street;
-        private String zipcode;
-
-        public MemberDTO(Member m) {
-            this.name = m.getMemberName();
-            this.age = m.getMemberAge();
-            this.sex = m.getMemberSex();
-            this.city = m.getAddress().getCity();
-            this.street = m.getAddress().getStreet();
-            this.zipcode = m.getAddress().getZipcode();
-        }
-    }
 
 
 
