@@ -1,24 +1,31 @@
 package healthApp.healthPrj.controller;
 
+import healthApp.healthPrj.controller.dto.MemberDto;
+import healthApp.healthPrj.controller.dto.Result;
 import healthApp.healthPrj.entity.Address;
 import healthApp.healthPrj.entity.Gym;
+import healthApp.healthPrj.entity.Member;
+import healthApp.healthPrj.repository.GymRepository;
+import healthApp.healthPrj.repository.MemberRepository;
 import healthApp.healthPrj.service.GymService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
 public class GymApiController {
 
     private final GymService gymService;
+    private final GymRepository gymRepository;
+    private final MemberRepository memberRepository;
 
     /**
      * 헬스장가입
@@ -37,6 +44,29 @@ public class GymApiController {
 
         return new createGymResponse(gymId,"등록완료");
     }
+
+    /**
+     * 헬스장 별 가입회원 조회
+     * @param id
+     * @return Result
+     */
+    @GetMapping("/gym/members/{id}")
+    public Result findGymMembers(@PathVariable("id") Long id){
+
+        Optional<Gym> findGym = gymRepository.findById(id);
+        Gym gym = findGym.get();
+        List<Member> memberList = gym.getMemberList();
+        List<MemberDto> collect = memberList.stream().map(m -> new MemberDto(m)).collect(Collectors.toList());
+
+        return new Result(collect.size(),collect);
+
+
+    }
+
+
+
+
+
 
     @Data
     static class createGymResponse{
