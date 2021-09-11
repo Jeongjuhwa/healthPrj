@@ -22,7 +22,7 @@ public class GymRepositoryImpl implements GymRepositoryCustom{
 
 
     @Override
-    public List<Gym> findAcceptGymById(Long id) {
+    public List<Gym> findAcceptGym() {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         List<Gym> findGym = queryFactory
                 .selectFrom(gym)

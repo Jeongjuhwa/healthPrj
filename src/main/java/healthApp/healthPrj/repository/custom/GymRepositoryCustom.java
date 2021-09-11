@@ -7,7 +7,7 @@ import java.util.List;
 public interface GymRepositoryCustom {
 
 
-    List<Gym> findAcceptGymById(Long id);
+    List<Gym> findAcceptGym();
 
 
 }
