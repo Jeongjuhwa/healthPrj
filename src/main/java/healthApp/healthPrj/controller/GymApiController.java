@@ -50,10 +50,9 @@ public class GymApiController {
      */
     @GetMapping("/gyms")
     public Result findGyms(){
-        List<Gym> gymList = gymService.findGyms();
 
-        List<GymDto> collect = gymList.stream().map(gym -> new GymDto(gym)).collect(Collectors.toList());
-
+        List<Gym> findAllGym = gymRepository.findAcceptGym();
+        List<GymDto> collect = findAllGym.stream().map(gym -> new GymDto(gym)).collect(Collectors.toList());
         return new Result(collect.size(),collect);
 
     }
