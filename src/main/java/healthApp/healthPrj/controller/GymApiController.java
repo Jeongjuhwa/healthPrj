@@ -46,6 +46,19 @@ public class GymApiController {
     }
 
     /**
+     * 헬스장 목록 전체 조회
+     */
+    @GetMapping("/gyms")
+    public Result findGyms(){
+        List<Gym> gymList = gymService.findGyms();
+
+        List<GymDto> collect = gymList.stream().map(gym -> new GymDto(gym)).collect(Collectors.toList());
+
+        return new Result(collect.size(),collect);
+
+    }
+
+    /**
      * 헬스장 별 가입회원 조회
      * @param id
      * @return Result
@@ -61,6 +74,17 @@ public class GymApiController {
         return new Result(collect.size(),collect);
 
 
+    }
+
+    @Data
+    static class GymDto{
+        private String gymName;
+        private Address address;
+
+        public GymDto(Gym gym) {
+            this.gymName = gym.getGymName();
+            this.address = gym.getAddress();
+        }
     }
 
 
