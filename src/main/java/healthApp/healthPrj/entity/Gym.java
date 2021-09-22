@@ -46,4 +46,14 @@ public class Gym extends BaseEntity implements Persistable<Long> {
         this.address = address;
         this.status = JoinStatus.PENDING;
     }
+
+    /**
+     * 가입승인
+     */
+    public void accept() {
+        if(this.getStatus() != JoinStatus.PENDING){
+            throw new IllegalStateException("가입대기 상태인 헬스장만 승인이 가능합니다.");
+        }
+        this.status = JoinStatus.ACCEPT;
+    }
 }

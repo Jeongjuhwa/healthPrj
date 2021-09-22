@@ -42,8 +42,20 @@ public class GymService {
     /**
      * 헬스장 전체 목록 조회
      */
-
     public List<Gym> findGyms(){
         return gymRepository.findAll();
+    }
+
+    /**
+     * 가입 승인(헬스장)
+     */
+    @Transactional
+    public Long acceptGym(Long id){
+        Optional<Gym> findGym = gymRepository.findById(id);
+        Gym gym = findGym.get();
+        gym.accept();
+
+        return gym.getId();
+
     }
 }
