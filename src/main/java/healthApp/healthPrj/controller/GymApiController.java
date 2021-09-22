@@ -62,7 +62,7 @@ public class GymApiController {
      * @param id
      * @return Result
      */
-    @GetMapping("/gym/members/{id}")
+    @GetMapping("/gym/{id}/members")
     public Result findGymMembers(@PathVariable("id") Long id){
 
         Optional<Gym> findGym = gymRepository.findById(id);
