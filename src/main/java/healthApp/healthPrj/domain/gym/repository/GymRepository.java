@@ -11,5 +11,5 @@ public interface GymRepository extends JpaRepository<Gym, Long>, GymRepositoryCu
 
     Optional<Gym> findByGymNumber(String gymNumber);
 
-    List<Gym> findAllPendingByStatus(JoinStatus joinStatus);
+
 }
