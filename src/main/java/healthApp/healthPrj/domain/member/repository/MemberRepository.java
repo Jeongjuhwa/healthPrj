@@ -10,6 +10,8 @@ public interface MemberRepository extends JpaRepository<Member,Long>, MemberRepo
 
     Optional<Member> findByEmailId(String emailId);
 
+    Long countByEmailId(String emailId);
+
 
 
 

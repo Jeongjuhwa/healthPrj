@@ -5,6 +5,7 @@ import healthApp.healthPrj.common.object.Address;
 import healthApp.healthPrj.domain.gym.model.Trainer;
 import healthApp.healthPrj.common.base.BaseEntity;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Persistable;
@@ -46,6 +47,7 @@ public class Member extends BaseEntity implements Persistable<Long> {
         return this.getCreatedDate() == null;
     }
 
+    @Builder
     public Member(String emailId, String password, String memberName, int memberAge, String memberSex, Address address) {
         this.emailId = emailId;
         this.password = password;

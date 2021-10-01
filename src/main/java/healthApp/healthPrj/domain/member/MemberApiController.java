@@ -1,8 +1,6 @@
 package healthApp.healthPrj.domain.member;
 
-import healthApp.healthPrj.domain.member.dto.CreateMemberRequest;
-import healthApp.healthPrj.domain.member.dto.MemberDto;
-import healthApp.healthPrj.common.dto.Result;
+import healthApp.healthPrj.domain.member.dto.MemberForm;
 import healthApp.healthPrj.common.object.Address;
 import healthApp.healthPrj.domain.member.dto.MemberSearch;
 import healthApp.healthPrj.domain.member.model.Member;
@@ -27,14 +25,13 @@ public class MemberApiController {
 
     /**
      * 회원가입
-     * @param request
+     * @param memberForm
      * @return ResponseEntity<?>
      */
     @PostMapping("/join")
-    public ResponseEntity<?> saveMember(@RequestBody @Valid CreateMemberRequest request){
-        Address address = new Address(request.getCity(),request.getStreet(), request.getZipcode());
-        Member member = new Member(request.getEmailId(), request.getPassword(), request.getMemberName(), request.getMemberAge(), request.getMemberSex(),address );
-        memberService.join(member);
+    public ResponseEntity<?> saveMember(@RequestBody @Valid MemberForm memberForm){
+
+        memberService.join(memberForm);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 

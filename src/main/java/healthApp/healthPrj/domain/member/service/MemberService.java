@@ -1,5 +1,6 @@
 package healthApp.healthPrj.domain.member.service;
 
+import healthApp.healthPrj.domain.member.dto.MemberForm;
 import healthApp.healthPrj.domain.member.model.Member;
 import healthApp.healthPrj.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,25 +15,19 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final MemberValidator memberValidator;
 
     /**
      * 회원가입
      */
     @Transactional
-    public Long join(Member member){
+    public void join(MemberForm memberForm){
 
-        validationDuplicateMember(member);
-
+        memberForm.validate(memberValidator);
+        Member member = memberForm.entity();
         memberRepository.save(member);
 
-        return member.getId();
 
     }
-    private void validationDuplicateMember(Member member) {
-        Optional<Member> findMember = memberRepository.findByEmailId(member.getEmailId());
-        if(!findMember.isEmpty()){
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
-        }
 
-    }
 }
