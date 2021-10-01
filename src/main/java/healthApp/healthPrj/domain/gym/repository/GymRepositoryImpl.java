@@ -3,17 +3,18 @@ package healthApp.healthPrj.domain.gym.repository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import healthApp.healthPrj.domain.gym.model.Gym;
 import healthApp.healthPrj.common.enums.JoinStatus;
+import healthApp.healthPrj.domain.gym.model.QGym;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
-import static healthApp.healthPrj.entity.QGym.gym;
+import static healthApp.healthPrj.domain.gym.model.QGym.gym;
+
 
 @RequiredArgsConstructor
 public class GymRepositoryImpl implements GymRepositoryCustom{
 
-    private final EntityManager em;
+    private final JPAQueryFactory query;
 
 
 
@@ -21,8 +22,7 @@ public class GymRepositoryImpl implements GymRepositoryCustom{
 
     @Override
     public List<Gym> findAcceptGym() {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-        List<Gym> findGym = queryFactory
+        List<Gym> findGym = query
                 .selectFrom(gym)
                 .where(gym.status.eq(JoinStatus.ACCEPT))
                 .fetch();
