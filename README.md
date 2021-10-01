@@ -32,6 +32,7 @@
 - SpringBoot
 - SpringMVC
 - Spring-Data-jpa
+- QueryDSL
 
 ### Language
 
