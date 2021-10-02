@@ -48,14 +48,18 @@ public class Member extends BaseEntity implements Persistable<Long> {
     }
 
     @Builder
-    public Member(String emailId, String password, String memberName, int memberAge, String memberSex, Address address) {
+    public Member(Long id, String emailId, String password, String memberName, int memberAge, String memberSex, Address address, Gym gym, Trainer trainer) {
+        this.id = id;
         this.emailId = emailId;
         this.password = password;
         this.memberName = memberName;
         this.memberAge = memberAge;
         this.memberSex = memberSex;
         this.address = address;
+        this.gym = gym;
+        this.trainer = trainer;
     }
+
 
     /**
      * 연관관계 메서드

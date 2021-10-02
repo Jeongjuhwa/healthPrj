@@ -7,7 +7,7 @@ import lombok.Data;
 public class MemberDto {
 
     private String name;
-    private int age;
+    private Integer age;
     private String sex;
     private String city;
     private String street;
@@ -22,5 +22,12 @@ public class MemberDto {
         this.zipcode = m.getAddress().getZipcode();
     }
 
-
+    public MemberDto(String name, Integer age, String sex, String city, String street, String zipcode) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        this.city = city;
+        this.street = street;
+        this.zipcode = zipcode;
+    }
 }
