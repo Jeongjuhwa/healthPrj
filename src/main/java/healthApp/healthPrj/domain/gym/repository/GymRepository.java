@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface GymRepository extends JpaRepository<Gym, Long>, GymRepositoryCustom {
 
-    Optional<Gym> findByGymNumber(String gymNumber);
+    Long countByGymNumber(String gymNumber);
 
 
 }

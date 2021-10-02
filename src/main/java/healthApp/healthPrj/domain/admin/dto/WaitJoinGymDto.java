@@ -23,9 +23,9 @@ public class WaitJoinGymDto {
     private JoinStatus status;
 
     public WaitJoinGymDto(Gym gym) {
-        this.gymName = gymName;
-        this.gymNumber = gymNumber;
-        this.address = address;
-        this.status = status;
+        this.gymName = gym.getGymName();
+        this.gymNumber = gym.getGymNumber();
+        this.address = gym.getAddress();
+        this.status = gym.getStatus();
     }
 }

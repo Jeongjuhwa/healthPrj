@@ -5,6 +5,7 @@ import healthApp.healthPrj.common.enums.JoinStatus;
 import healthApp.healthPrj.domain.member.model.Member;
 import healthApp.healthPrj.common.base.BaseEntity;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Persistable;
@@ -43,7 +44,11 @@ public class Gym extends BaseEntity implements Persistable<Long> {
         return this.getCreatedDate() == null;
     }
 
-    public Gym(String gymName, String gymNumber, Address address) {
+    @Builder
+    public Gym(Long id, List<Member> memberList, List<Trainer> trainerList, String gymName, String gymNumber, Address address, JoinStatus status) {
+        this.id = id;
+        this.memberList = memberList;
+        this.trainerList = trainerList;
         this.gymName = gymName;
         this.gymNumber = gymNumber;
         this.address = address;
@@ -58,5 +63,11 @@ public class Gym extends BaseEntity implements Persistable<Long> {
             throw new IllegalStateException("가입대기 상태인 헬스장만 승인이 가능합니다.");
         }
         this.status = JoinStatus.ACCEPT;
+    }
+
+    public void checkJoinStatus(){
+        if(this.getStatus() != JoinStatus.ACCEPT){
+            throw new IllegalStateException("가입승인된 헬스장이 아닙니다.");
+        }
     }
 }
