@@ -25,12 +25,11 @@ public class AdminService {
      * 가입 승인(헬스장)
      */
     @Transactional
-    public Long acceptGym(Long id){
+    public void acceptGym(Long id){
         Optional<Gym> findGym = adminRepository.findById(id);
         Gym gym = findGym.get();
         gym.accept();
-
-        return gym.getId();
+        
 
     }
 

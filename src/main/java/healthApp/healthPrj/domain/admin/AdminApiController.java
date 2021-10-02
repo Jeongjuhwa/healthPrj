@@ -49,7 +49,7 @@ public class AdminApiController {
     @PostMapping("/gym/{gymId}/accept")
     public ResponseEntity<?> acceptGym(@PathVariable("gymId") Long id){
 
-        Long gymId = adminService.acceptGym(id);
+        adminService.acceptGym(id);
 
 
         return ResponseEntity.ok(HttpStatus.CREATED);
