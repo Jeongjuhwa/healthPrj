@@ -1,5 +1,6 @@
 package healthApp.healthPrj.domain.gym.service;
 
+import healthApp.healthPrj.domain.gym.dto.GymForm;
 import healthApp.healthPrj.domain.gym.model.Gym;
 import healthApp.healthPrj.domain.gym.repository.GymRepository;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @Transactional(readOnly = true)
@@ -15,29 +16,25 @@ import java.util.Optional;
 public class GymService {
 
     private final GymRepository gymRepository;
+    private final GymValidator gymValidator;
 
     /**
      * 헬스장 등록
      */
     @Transactional
-    public Long join(Gym gym){
-        validateDuplicateGymNumber(gym);
+    public void join(GymForm gymForm){
+
+        gymForm.validate(gymValidator);
+
+        Gym gym = gymForm.entity();
+
 
         gymRepository.save(gym);
 
-        return gym.getId();
 
     }
 
-    private void validateDuplicateGymNumber(Gym gym) {
 
-        Optional<Gym> findGym = gymRepository.findByGymNumber(gym.getGymNumber());
-
-        if(!findGym.isEmpty()){
-            throw new IllegalStateException("이미 등록된 업체입니다.");
-        }
-
-    }
 
     /**
      * 헬스장 전체 목록 조회
