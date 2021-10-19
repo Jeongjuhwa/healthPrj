@@ -1,7 +1,7 @@
 package healthApp.healthPrj.domain.admin.repository;
 
 import healthApp.healthPrj.common.enums.JoinStatus;
-import healthApp.healthPrj.domain.gym.model.Gym;
+import healthApp.healthPrj.domain.member.model.Gym;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

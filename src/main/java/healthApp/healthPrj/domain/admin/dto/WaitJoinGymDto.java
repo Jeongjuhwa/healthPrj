@@ -2,7 +2,7 @@ package healthApp.healthPrj.domain.admin.dto;
 
 import healthApp.healthPrj.common.enums.JoinStatus;
 import healthApp.healthPrj.common.object.Address;
-import healthApp.healthPrj.domain.gym.model.Gym;
+import healthApp.healthPrj.domain.member.model.Gym;
 import lombok.Data;
 
 import javax.persistence.Embedded;

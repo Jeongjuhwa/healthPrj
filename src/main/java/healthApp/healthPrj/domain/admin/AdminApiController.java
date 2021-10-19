@@ -1,24 +1,14 @@
 package healthApp.healthPrj.domain.admin;
 
 import healthApp.healthPrj.common.enums.JoinStatus;
-import healthApp.healthPrj.common.object.Address;
-import healthApp.healthPrj.common.dto.Result;
 import healthApp.healthPrj.domain.admin.dto.WaitJoinGymDto;
 import healthApp.healthPrj.domain.admin.service.AdminService;
-import healthApp.healthPrj.domain.gym.model.Gym;
-import healthApp.healthPrj.domain.gym.repository.GymRepository;
-import healthApp.healthPrj.domain.gym.service.GymService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Embedded;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor

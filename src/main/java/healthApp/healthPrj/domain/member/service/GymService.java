@@ -1,8 +1,8 @@
-package healthApp.healthPrj.domain.gym.service;
+package healthApp.healthPrj.domain.member.service;
 
-import healthApp.healthPrj.domain.gym.dto.GymForm;
-import healthApp.healthPrj.domain.gym.model.Gym;
-import healthApp.healthPrj.domain.gym.repository.GymRepository;
+import healthApp.healthPrj.domain.member.dto.GymForm;
+import healthApp.healthPrj.domain.member.model.Gym;
+import healthApp.healthPrj.domain.member.repository.GymRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

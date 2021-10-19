@@ -1,11 +1,11 @@
-package healthApp.healthPrj.domain.board.repository;
+package healthApp.healthPrj.domain.board.repository.query;
 
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.EntityManager;
 
 @RequiredArgsConstructor
-public class BoardRepositoryImpl implements BoardRepositoryCustom{
+public class BoardQueryRepository {
 
     private final EntityManager em;
 
