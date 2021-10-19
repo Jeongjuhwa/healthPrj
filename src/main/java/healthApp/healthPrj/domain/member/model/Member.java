@@ -1,25 +1,28 @@
 package healthApp.healthPrj.domain.member.model;
 
-import healthApp.healthPrj.domain.gym.model.Gym;
 import healthApp.healthPrj.common.object.Address;
-import healthApp.healthPrj.domain.gym.model.Trainer;
 import healthApp.healthPrj.common.base.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
+
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member extends BaseEntity implements Persistable<Long> {
+public class Member extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "gym_id")
+    private Gym gym;
 
     private String emailId;
 
@@ -27,28 +30,16 @@ public class Member extends BaseEntity implements Persistable<Long> {
 
     private String memberName;
 
-    private int memberAge;
+    private Integer memberAge;
 
     private String memberSex;
 
     @Embedded
     private Address address;
 
-    @JoinColumn(name = "gym_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Gym gym;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trainer_id")
-    private Trainer trainer;
-
-    @Override
-    public boolean isNew() {
-        return this.getCreatedDate() == null;
-    }
 
     @Builder
-    public Member(Long id, String emailId, String password, String memberName, int memberAge, String memberSex, Address address, Gym gym, Trainer trainer) {
+    public Member(Long id, String emailId, String password, String memberName, int memberAge, String memberSex, Address address) {
         this.id = id;
         this.emailId = emailId;
         this.password = password;
@@ -56,21 +47,13 @@ public class Member extends BaseEntity implements Persistable<Long> {
         this.memberAge = memberAge;
         this.memberSex = memberSex;
         this.address = address;
+
+    }
+
+    public Member mapGym(Gym gym){
         this.gym = gym;
-        this.trainer = trainer;
+        return this;
     }
 
 
-    /**
-     * 연관관계 메서드
-     */
-    public void setGym(Gym gym){
-        this.gym =gym;
-        gym.getMemberList().add(this);
-    }
-
-    public void setTrainer(Trainer trainer){
-        this.trainer = trainer;
-        trainer.getMemberList().add(this);
-    }
 }

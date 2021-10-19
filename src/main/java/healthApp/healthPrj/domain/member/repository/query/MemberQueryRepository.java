@@ -1,4 +1,4 @@
-package healthApp.healthPrj.domain.member.repository;
+package healthApp.healthPrj.domain.member.repository.query;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -16,11 +16,11 @@ import java.util.List;
 import static healthApp.healthPrj.domain.member.model.QMember.member;
 
 @RequiredArgsConstructor
-public class MemberRepositoryImpl implements MemberRepositoryCustom{
+public class MemberQueryRepository{
 
     private final JPAQueryFactory query;
 
-    @Override
+
     public Page<MemberDto> findByMemberSearch(MemberSearch memberSearch, Pageable pageable) {
         List<MemberDto> response = query.select(Projections.constructor(MemberDto.class,
                 member.memberName,
@@ -33,13 +33,42 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
         )
                 .from(member)
                 .where(
-                        isCondition(memberSearch.getName())
+                        isCondition(memberSearch.getName()),
+                        isNotDeleted()
+
                 )
                 .fetch();
 
         return new PageImpl<>(response, pageable, response.size());
 
 
+    }
+
+
+    public Page<MemberDto> findMemberByGym(Long gymId, Pageable pageable) {
+
+        List<MemberDto> response = query.select(Projections.constructor(MemberDto.class,
+                member.memberName,
+                member.memberAge,
+                member.memberSex
+                )
+        )
+                .from(member)
+                .where(
+                        gymIdEq(gymId),
+                        isNotDeleted()
+                )
+                .fetch();
+        return new PageImpl<>(response, pageable, response.size());
+
+    }
+
+    private BooleanExpression gymIdEq(Long gymId) {
+        return member.gym.id.eq(gymId);
+    }
+
+    private BooleanExpression isNotDeleted() {
+        return member.deletedDateTime.isNull();
     }
 
     private BooleanExpression isCondition(String name) {

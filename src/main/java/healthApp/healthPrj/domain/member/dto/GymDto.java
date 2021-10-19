@@ -1,4 +1,4 @@
-package healthApp.healthPrj.domain.gym.dto;
+package healthApp.healthPrj.domain.member.dto;
 
 import healthApp.healthPrj.common.object.Address;
 

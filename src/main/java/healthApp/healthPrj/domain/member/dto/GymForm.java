@@ -1,8 +1,8 @@
-package healthApp.healthPrj.domain.gym.dto;
+package healthApp.healthPrj.domain.member.dto;
 
 import healthApp.healthPrj.common.object.Address;
-import healthApp.healthPrj.domain.gym.model.Gym;
-import healthApp.healthPrj.domain.gym.service.GymValidator;
+import healthApp.healthPrj.domain.member.model.Gym;
+import healthApp.healthPrj.domain.member.service.GymValidator;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;

@@ -1,29 +1,30 @@
-package healthApp.healthPrj.domain.gym.repository;
+package healthApp.healthPrj.domain.member.repository.query;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import healthApp.healthPrj.domain.gym.dto.GymDto;
-import healthApp.healthPrj.domain.gym.dto.GymSearchCondition;
-import healthApp.healthPrj.domain.gym.model.Gym;
+import healthApp.healthPrj.domain.member.dto.GymDto;
+import healthApp.healthPrj.domain.member.dto.GymSearchCondition;
+import healthApp.healthPrj.domain.member.model.Gym;
 import healthApp.healthPrj.common.enums.JoinStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static healthApp.healthPrj.domain.gym.model.QGym.gym;
-import static healthApp.healthPrj.domain.member.model.QMember.member;
+import static healthApp.healthPrj.domain.member.model.QGym.gym;
 
 
 @RequiredArgsConstructor
-public class GymRepositoryImpl implements GymRepositoryCustom {
+@Repository
+public class GymQueryRepository{
 
     private final JPAQueryFactory query;
 
-    @Override
+
     public List<Gym> findAcceptGym() {
         List<Gym> findGym = query
                 .selectFrom(gym)
@@ -34,7 +35,7 @@ public class GymRepositoryImpl implements GymRepositoryCustom {
         return findGym;
     }
 
-    @Override
+
     public Page<GymDto> findByGymSearchCondition(GymSearchCondition gymSearchCondition, Pageable pageable) {
 
         List<GymDto> response = query.select(Projections.constructor(GymDto.class,

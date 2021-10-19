@@ -1,7 +1,6 @@
-package healthApp.healthPrj.domain.gym.dto;
+package healthApp.healthPrj.domain.member.dto;
 
-import healthApp.healthPrj.domain.member.dto.MemberDto;
-import healthApp.healthPrj.domain.gym.model.Gym;
+import healthApp.healthPrj.domain.member.model.Gym;
 import lombok.Data;
 
 import java.util.List;

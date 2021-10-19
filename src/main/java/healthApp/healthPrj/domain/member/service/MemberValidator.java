@@ -1,5 +1,7 @@
 package healthApp.healthPrj.domain.member.service;
 
+import healthApp.healthPrj.common.exception.ErrorCode;
+import healthApp.healthPrj.common.exception.HealthAppException;
 import healthApp.healthPrj.domain.member.model.Member;
 import healthApp.healthPrj.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +18,7 @@ public class MemberValidator {
     public void validationDuplicateMember(String email) {
         Long count = memberRepository.countByEmailId(email);
         if(isPresent(count)){
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
+            throw new HealthAppException(ErrorCode.DUPLICATE_EMAIL);
         }
 
     }

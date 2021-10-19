@@ -1,6 +1,8 @@
-package healthApp.healthPrj.domain.gym.service;
+package healthApp.healthPrj.domain.member.service;
 
-import healthApp.healthPrj.domain.gym.repository.GymRepository;
+import healthApp.healthPrj.common.exception.ErrorCode;
+import healthApp.healthPrj.common.exception.HealthAppException;
+import healthApp.healthPrj.domain.member.repository.GymRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +17,7 @@ public class GymValidator {
         Long count = gymRepository.countByGymNumber(gymNumber);
 
         if(isPresent(count)){
-            throw new IllegalStateException("이미 등록된 업체입니다.");
+            throw new HealthAppException(ErrorCode.DUPLICATE_GYMNUMBER);
         }
 
     }

@@ -1,4 +1,4 @@
-package healthApp.healthPrj.domain.gym.service;
+package healthApp.healthPrj.domain.member.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

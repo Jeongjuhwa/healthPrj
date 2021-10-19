@@ -1,10 +1,10 @@
-package healthApp.healthPrj.domain.gym;
+package healthApp.healthPrj.domain.member;
 
-import healthApp.healthPrj.domain.gym.dto.GymForm;
-import healthApp.healthPrj.domain.gym.dto.GymSearchCondition;
-import healthApp.healthPrj.domain.gym.service.query.GymQueryService;
-import healthApp.healthPrj.domain.gym.repository.GymRepository;
-import healthApp.healthPrj.domain.gym.service.GymService;
+import healthApp.healthPrj.domain.member.dto.GymForm;
+import healthApp.healthPrj.domain.member.dto.GymSearchCondition;
+import healthApp.healthPrj.domain.member.service.query.GymQueryService;
+import healthApp.healthPrj.domain.member.repository.GymRepository;
+import healthApp.healthPrj.domain.member.service.GymService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,6 @@ import javax.validation.Valid;
 public class GymApiController {
 
     private final GymService gymService;
-    private final GymRepository gymRepository;
     private final GymQueryService gymQueryService;
 
     /**
@@ -45,17 +44,7 @@ public class GymApiController {
 
     }
 
-    /**
-     * 헬스장 별 가입회원 조회
-     * @param id
-     * @return Result
-     */
-    @GetMapping("/{id}/members")
-    public ResponseEntity<?> findGymMembers(@PathVariable("id") Long id){
 
-        return ResponseEntity.ok(gymQueryService.findGymMembers(id));
-
-    }
 
 
 

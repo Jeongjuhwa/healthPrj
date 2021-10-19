@@ -1,5 +1,7 @@
-package healthApp.healthPrj.domain.gym.model;
+package healthApp.healthPrj.domain.member.model;
 
+import healthApp.healthPrj.common.exception.ErrorCode;
+import healthApp.healthPrj.common.exception.HealthAppException;
 import healthApp.healthPrj.common.object.Address;
 import healthApp.healthPrj.common.enums.JoinStatus;
 import healthApp.healthPrj.domain.member.model.Member;
@@ -17,17 +19,11 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Gym extends BaseEntity implements Persistable<Long> {
+public class Gym extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name = "gym_id")
     private Long id;
-
-    @OneToMany(mappedBy = "gym")
-    private List<Member> memberList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "gym")
-    private List<Trainer> trainerList = new ArrayList<>();
 
     private String gymName;
 
@@ -39,16 +35,10 @@ public class Gym extends BaseEntity implements Persistable<Long> {
     @Enumerated(EnumType.STRING)
     private JoinStatus status;
 
-    @Override
-    public boolean isNew() {
-        return this.getCreatedDate() == null;
-    }
 
     @Builder
-    public Gym(Long id, List<Member> memberList, List<Trainer> trainerList, String gymName, String gymNumber, Address address, JoinStatus status) {
+    public Gym(Long id, String gymName, String gymNumber, Address address, JoinStatus status) {
         this.id = id;
-        this.memberList = memberList;
-        this.trainerList = trainerList;
         this.gymName = gymName;
         this.gymNumber = gymNumber;
         this.address = address;
@@ -59,15 +49,23 @@ public class Gym extends BaseEntity implements Persistable<Long> {
      * 가입승인
      */
     public void accept() {
-        if(this.getStatus() != JoinStatus.PENDING){
-            throw new IllegalStateException("가입대기 상태인 헬스장만 승인이 가능합니다.");
+        if(isNotPending()){
+            throw new HealthAppException(ErrorCode.GYM_NOT_PENDING);
         }
         this.status = JoinStatus.ACCEPT;
     }
 
+    private boolean isNotPending() {
+        return this.getStatus() != JoinStatus.PENDING;
+    }
+
     public void checkJoinStatus(){
-        if(this.getStatus() != JoinStatus.ACCEPT){
-            throw new IllegalStateException("가입승인된 헬스장이 아닙니다.");
+        if(isNotAccept()){
+            throw new HealthAppException(ErrorCode.GYM_NOT_ACCEPT);
         }
+    }
+
+    private boolean isNotAccept() {
+        return this.getStatus() != JoinStatus.ACCEPT;
     }
 }

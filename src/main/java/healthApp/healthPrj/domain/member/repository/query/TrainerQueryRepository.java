@@ -1,11 +1,11 @@
-package healthApp.healthPrj.domain.gym.repository;
+package healthApp.healthPrj.domain.member.repository.query;
 
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.EntityManager;
 
 @RequiredArgsConstructor
-public class TrainerRepositoryImpl implements TrainerRepositoryCustom{
+public class TrainerQueryRepository {
 
     private final EntityManager em;
 }

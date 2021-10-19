@@ -20,6 +20,12 @@ public class BaseTimeEntity {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
+    private LocalDateTime deletedDateTime;
+
+    public void delete() {
+        this.deletedDateTime = LocalDateTime.now();
+    }
+
     @PrePersist
     public void prePersist(){
         LocalDateTime now = LocalDateTime.now();
