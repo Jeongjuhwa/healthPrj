@@ -3,6 +3,7 @@ package healthApp.healthPrj.domain.board.model;
 import healthApp.healthPrj.domain.member.model.Member;
 import healthApp.healthPrj.common.base.BaseEntity;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Persistable;
@@ -18,19 +19,37 @@ public class Board extends BaseEntity{
     @Column(name = "board_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    private Long memberId;
 
     private String title;
 
     private String content;
 
-    private int hit;
+    private Long hit;
 
-    private int heart;
+    private Long heart;
 
 
+    @Builder
+    public Board(Long memberId, String title, String content, int hit, int heart) {
+        this.memberId = memberId;
+        this.title = title;
+        this.content = content;
+        this.hit = 0L;
+        this.heart = 0L;
+    }
+
+    public void hit(){
+        hit += 1;
+    }
+
+    public void heart(){heart +=1;}
+
+
+    public Board mapWriter(Long memberId) {
+        this.memberId = memberId;
+        return this;
+    }
 
 
 }
