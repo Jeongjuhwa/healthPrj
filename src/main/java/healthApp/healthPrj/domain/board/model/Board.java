@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Board extends BaseEntity implements Persistable<Long> {
+public class Board extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name = "board_id")
@@ -31,9 +31,6 @@ public class Board extends BaseEntity implements Persistable<Long> {
     private int heart;
 
 
-    @Override
-    public boolean isNew() {
-        return this.getCreatedDate() == null;
-    }
+
 
 }

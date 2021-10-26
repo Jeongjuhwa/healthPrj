@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Comment extends BaseEntity implements Persistable<Long> {
+public class Comment extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "comment_id")
@@ -24,8 +24,5 @@ public class Comment extends BaseEntity implements Persistable<Long> {
 
     private String commentContent;
 
-    @Override
-    public boolean isNew() {
-        return this.getCreatedDate() == null;
-    }
+
 }
