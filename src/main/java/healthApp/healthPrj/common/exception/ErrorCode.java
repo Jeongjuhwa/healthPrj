@@ -15,7 +15,7 @@ public enum ErrorCode {
     DUPLICATE_EMAIL(HttpStatus.CONFLICT,"이미 가입한 회원입니다."),
     DUPLICATE_GYMNUMBER(HttpStatus.CONFLICT,"이미 가입한 헬스장번호 입니다."),
     GYM_NOT_ACCEPT(HttpStatus.CONFLICT, "가입승인된 헬스장이 아닙니다."),
-    GYM_NOT_PENDING(HttpStatus.CONFLICT,"가입대기 상태인 헬스장만 승인이 가능합니다.")
+    GYM_NOT_PENDING(HttpStatus.CONFLICT,"가입대기 상태인 헬스장만 승인이 가능합니다."),
 
     /* 500 Internal Server Error : 서버 내부 문제 */
     INTERNAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "내부에 문제가 발생했습니다");
