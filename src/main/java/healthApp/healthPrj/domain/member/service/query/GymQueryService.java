@@ -1,8 +1,8 @@
 package healthApp.healthPrj.domain.member.service.query;
 
 import healthApp.healthPrj.domain.member.dto.GymDto;
+import healthApp.healthPrj.domain.member.dto.GymMemberResponse;
 import healthApp.healthPrj.domain.member.dto.GymSearchCondition;
-import healthApp.healthPrj.domain.member.repository.GymRepository;
 import healthApp.healthPrj.domain.member.repository.query.GymQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,6 +22,10 @@ public class GymQueryService {
 
         return gymQueryRepository.findByGymSearchCondition(gymSearchCondition,pageable);
 
+    }
+
+    public Page<GymMemberResponse> findGymMembers(Long gymId, Pageable pageable){
+        return gymQueryRepository.findGymMembers(gymId, pageable);
     }
 
 }

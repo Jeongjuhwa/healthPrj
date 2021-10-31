@@ -1,5 +1,6 @@
 package healthApp.healthPrj.domain.member;
 
+import healthApp.healthPrj.common.security.annotation.JwtClaim;
 import healthApp.healthPrj.domain.member.dto.GymForm;
 import healthApp.healthPrj.domain.member.dto.GymSearchCondition;
 import healthApp.healthPrj.domain.member.service.query.GymQueryService;
@@ -41,6 +42,16 @@ public class GymApiController {
     public ResponseEntity<?> findGyms(GymSearchCondition gymSearchCondition, Pageable pageable){
 
         return ResponseEntity.ok(gymQueryService.findByGymSearchCondition(gymSearchCondition,pageable));
+
+    }
+
+    /**
+     * 내 헬스장 회원 목록 조회
+     */
+    @GetMapping("/member")
+    public ResponseEntity<?> findGymMembers(@JwtClaim("info.id") Long gymId, Pageable pageable){
+
+        return ResponseEntity.ok(gymQueryService.findGymMembers(gymId,pageable));
 
     }
 
