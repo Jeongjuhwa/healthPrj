@@ -4,6 +4,7 @@ import healthApp.healthPrj.common.object.Address;
 import healthApp.healthPrj.domain.member.model.Gym;
 import healthApp.healthPrj.domain.member.model.Member;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,22 +29,30 @@ public class InitDb {
     @RequiredArgsConstructor
     static class InitService{
 
-        public final EntityManager em;
+        private final EntityManager em;
+        private final PasswordEncoder passwordEncoder;
+
         @Transactional
         public void dbInit1(){
 
             Gym gym1 = Gym.builder()
                     .gymName("spoAny")
+                    .emailId("spoAny@naver.com")
+                    .password(passwordEncoder.encode("spozzang"))
                     .gymNumber("2233344444")
                     .address(new Address("서울시","공항대로34","12115"))
                     .build();
             Gym gym2 = Gym.builder()
                     .gymName("헬스장")
+                    .emailId("health@naver.com")
+                    .password(passwordEncoder.encode("healthzzang"))
                     .gymNumber("1122233333")
                     .address(new Address("서울시","공항대로376","53215"))
                     .build();
             Gym gym3 = Gym.builder()
                     .gymName("주화헬스")
+                    .emailId("juhwa@naver.com")
+                    .password(passwordEncoder.encode("juhwazzang"))
                     .gymNumber("7788899999")
                     .address(new Address("서울시","공항대로285","21833"))
                     .build();
@@ -57,7 +66,7 @@ public class InitDb {
         public void dbInit2(){
             Member member1 = Member.builder()
                     .emailId("qwe199942@naver.com")
-                    .password("963.")
+                    .password(passwordEncoder.encode("963."))
                     .memberName("정주화")
                     .memberAge(26)
                     .memberSex("남")
@@ -65,7 +74,7 @@ public class InitDb {
                     .build();
             Member member2 = Member.builder()
                     .emailId("gwangtae@naver.com")
-                    .password("234.")
+                    .password(passwordEncoder.encode("234."))
                     .memberName("이태광")
                     .memberAge(27)
                     .memberSex("남")
@@ -73,7 +82,7 @@ public class InitDb {
                     .build();
             Member member3 = Member.builder()
                     .emailId("ohno@naver.com")
-                    .password("dkssud")
+                    .password(passwordEncoder.encode("dkssud"))
                     .memberName("조현호")
                     .memberAge(27)
                     .memberSex("남")
@@ -81,7 +90,7 @@ public class InitDb {
                     .build();
             Member member4 = Member.builder()
                     .emailId("kojeong@naver.com")
-                    .password("koko")
+                    .password(passwordEncoder.encode("koko"))
                     .memberName("고정민")
                     .memberAge(27)
                     .memberSex("남")
@@ -89,7 +98,7 @@ public class InitDb {
                     .build();
             Member member5 = Member.builder()
                     .emailId("yuntae@naver.com")
-                    .password("tkfkd")
+                    .password(passwordEncoder.encode("tkfkd"))
                     .memberName("박윤태")
                     .memberAge(27)
                     .memberSex("남")
@@ -97,7 +106,7 @@ public class InitDb {
                     .build();
             Member member6 = Member.builder()
                     .emailId("moi@naver.com")
-                    .password("moi77")
+                    .password(passwordEncoder.encode("tkfkd"))
                     .memberName("박뫼름")
                     .memberAge(27)
                     .memberSex("여")
@@ -105,7 +114,7 @@ public class InitDb {
                     .build();
             Member member7 = Member.builder()
                     .emailId("jeyoung@naver.com")
-                    .password("alrnr123")
+                    .password(passwordEncoder.encode("tkfkd"))
                     .memberName("윤제영")
                     .memberAge(27)
                     .memberSex("여")
@@ -113,7 +122,7 @@ public class InitDb {
                     .build();
             Member member8 = Member.builder()
                     .emailId("hyukjin@naver.com")
-                    .password("okgolife")
+                    .password(passwordEncoder.encode("okgolife"))
                     .memberName("손혁진")
                     .memberAge(27)
                     .memberSex("남")
@@ -121,7 +130,7 @@ public class InitDb {
                     .build();
             Member member9 = Member.builder()
                     .emailId("jjongwu@naver.com")
-                    .password("busanuniv")
+                    .password(passwordEncoder.encode("busanuniv"))
                     .memberName("김종우")
                     .memberAge(27)
                     .memberSex("남")
@@ -129,7 +138,7 @@ public class InitDb {
                     .build();
             Member member10 = Member.builder()
                     .emailId("qkyeongja@naver.com")
-                    .password("taekwon")
+                    .password(passwordEncoder.encode("taekwon"))
                     .memberName("이경준")
                     .memberAge(27)
                     .memberSex("남")
