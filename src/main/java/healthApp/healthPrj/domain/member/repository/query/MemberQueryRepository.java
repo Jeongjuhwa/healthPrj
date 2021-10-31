@@ -5,17 +5,18 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import healthApp.healthPrj.domain.member.dto.MemberDto;
 import healthApp.healthPrj.domain.member.dto.MemberSearch;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import static healthApp.healthPrj.domain.member.model.QMember.member;
 
 @RequiredArgsConstructor
+@Repository
 public class MemberQueryRepository{
 
     private final JPAQueryFactory query;
@@ -44,28 +45,6 @@ public class MemberQueryRepository{
 
     }
 
-
-    public Page<MemberDto> findMemberByGym(Long gymId, Pageable pageable) {
-
-        List<MemberDto> response = query.select(Projections.constructor(MemberDto.class,
-                member.memberName,
-                member.memberAge,
-                member.memberSex
-                )
-        )
-                .from(member)
-                .where(
-                        gymIdEq(gymId),
-                        isNotDeleted()
-                )
-                .fetch();
-        return new PageImpl<>(response, pageable, response.size());
-
-    }
-
-    private BooleanExpression gymIdEq(Long gymId) {
-        return member.gym.id.eq(gymId);
-    }
 
     private BooleanExpression isNotDeleted() {
         return member.deletedDateTime.isNull();

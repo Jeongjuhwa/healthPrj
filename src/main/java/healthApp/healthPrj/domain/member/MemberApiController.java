@@ -45,18 +45,6 @@ public class MemberApiController {
 
     }
 
-    /**
-     * 헬스장별 회원조회
-     */
-    @GetMapping("/gym/{gymId}")
-    public ResponseEntity<?> findMemberByGym(@PathVariable Long gymId, Pageable pageable){
-
-
-        return ResponseEntity.ok(memberQueryService.findMemberByGym(gymId, pageable));
-
-    }
-
-
 
 
 }
