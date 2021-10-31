@@ -22,8 +22,6 @@ public class MemberQueryService {
         return memberQueryRepository.findByMemberSearch(memberSearch,pageable);
     }
 
-    public Page<MemberDto> findMemberByGym(Long gymId, Pageable pageable){
-        return memberQueryRepository.findMemberByGym(gymId, pageable);
-    }
+
 
 }
