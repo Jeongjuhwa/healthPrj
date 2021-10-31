@@ -1,11 +1,15 @@
 package healthApp.healthPrj.domain.member.model;
 
+import healthApp.healthPrj.common.exception.ErrorCode;
+import healthApp.healthPrj.common.exception.HealthAppException;
 import healthApp.healthPrj.common.object.Address;
 import healthApp.healthPrj.common.base.BaseEntity;
+import healthApp.healthPrj.domain.member.dto.MemberGymPayload;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
@@ -54,6 +58,18 @@ public class Member extends BaseEntity{
         this.gym = gym;
         return this;
     }
+
+    public void checkPassword(String password, PasswordEncoder passwordEncoder){
+        if(passwordIsNotEqual(password, passwordEncoder)){
+            throw new HealthAppException(ErrorCode.NOT_EQUAL_PASSWORD);
+        }
+    }
+
+    private boolean passwordIsNotEqual(String password, PasswordEncoder passwordEncoder) {
+        return !passwordEncoder.matches(password, this.password);
+    }
+
+    public MemberGymPayload createPayload(){return new MemberGymPayload(id, emailId);}
 
 
 }

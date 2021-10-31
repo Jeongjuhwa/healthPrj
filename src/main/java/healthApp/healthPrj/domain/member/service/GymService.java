@@ -4,6 +4,7 @@ import healthApp.healthPrj.domain.member.dto.GymForm;
 import healthApp.healthPrj.domain.member.model.Gym;
 import healthApp.healthPrj.domain.member.repository.GymRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ public class GymService {
 
     private final GymRepository gymRepository;
     private final GymValidator gymValidator;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * 헬스장 등록
@@ -26,7 +28,7 @@ public class GymService {
 
         gymForm.validate(gymValidator);
 
-        Gym gym = gymForm.entity();
+        Gym gym = gymForm.entity(passwordEncoder);
 
 
         gymRepository.save(gym);
