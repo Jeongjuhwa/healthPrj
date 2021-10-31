@@ -4,6 +4,7 @@ import healthApp.healthPrj.common.object.Address;
 import healthApp.healthPrj.domain.member.model.Member;
 import healthApp.healthPrj.domain.member.service.MemberValidator;
 import lombok.Data;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -28,7 +29,9 @@ public class MemberForm {
 
     private String zipcode;
 
-    public Member entity(){
+    public Member entity(MemberValidator memberValidator, PasswordEncoder passwordEncoder){
+        validate(memberValidator);
+        encryptPassword(passwordEncoder);
         return Member
                 .builder()
                 .emailId(emailId)
@@ -43,4 +46,6 @@ public class MemberForm {
     public void validate(MemberValidator memberValidator){
         memberValidator.validationDuplicateMember(emailId);
     }
+
+    public void encryptPassword(PasswordEncoder passwordEncoder) { this.password = passwordEncoder.encode(this.password); }
 }
