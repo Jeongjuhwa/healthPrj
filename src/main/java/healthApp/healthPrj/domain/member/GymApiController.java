@@ -3,6 +3,8 @@ package healthApp.healthPrj.domain.member;
 import healthApp.healthPrj.common.security.annotation.JwtClaim;
 import healthApp.healthPrj.domain.member.dto.GymForm;
 import healthApp.healthPrj.domain.member.dto.GymSearchCondition;
+import healthApp.healthPrj.domain.member.dto.TrainerForm;
+import healthApp.healthPrj.domain.member.service.TrainerService;
 import healthApp.healthPrj.domain.member.service.query.GymQueryService;
 import healthApp.healthPrj.domain.member.repository.GymRepository;
 import healthApp.healthPrj.domain.member.service.GymService;
@@ -21,6 +23,7 @@ public class GymApiController {
 
     private final GymService gymService;
     private final GymQueryService gymQueryService;
+    private final TrainerService trainerService;
 
     /**
      * 헬스장가입
@@ -52,6 +55,16 @@ public class GymApiController {
     public ResponseEntity<?> findGymMembers(@JwtClaim("info.id") Long gymId, Pageable pageable){
 
         return ResponseEntity.ok(gymQueryService.findGymMembers(gymId,pageable));
+
+    }
+
+    /**
+     * 트레이너 등록
+     */
+    @PostMapping("/trainer")
+    public ResponseEntity<?> registerTrainer(@JwtClaim("info.id")Long gymId, TrainerForm trainerForm){
+        trainerService.registerTrainer(gymId, trainerForm);
+        return ResponseEntity.ok(HttpStatus.CREATED);
 
     }
 

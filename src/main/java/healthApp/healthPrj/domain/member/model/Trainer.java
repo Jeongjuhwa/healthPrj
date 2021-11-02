@@ -2,6 +2,7 @@ package healthApp.healthPrj.domain.member.model;
 
 import healthApp.healthPrj.common.base.BaseEntity;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Persistable;
@@ -33,7 +34,11 @@ public class Trainer extends BaseEntity{
         return this;
     }
 
-
-
-
+    @Builder
+    public Trainer(Gym gym, String trainerName, int trainerAge, int trainerCareer) {
+        this.gym = gym;
+        this.trainerName = trainerName;
+        this.trainerAge = trainerAge;
+        this.trainerCareer = trainerCareer;
+    }
 }
